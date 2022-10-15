@@ -1,7 +1,8 @@
 package database
 
 import (
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 	"log"
 	"main/models"
 )
@@ -10,7 +11,7 @@ var Connector *gorm.DB
 
 func Connect(connectionString string) error {
 	var err error
-	Connector, err = gorm.Open("mysql", connectionString)
+	Connector, err = gorm.Open(mysql.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		return err
 	}
@@ -19,13 +20,25 @@ func Connect(connectionString string) error {
 }
 
 func Migrate() {
-	Connector.DropTable(
+	err := Connector.Migrator().DropTable(
 		&models.User{},
 		&models.Meal{},
+		&models.UserMeal{},
 	)
-	Connector.AutoMigrate(
+	if err != nil {
+		panic(err.Error())
+	}
+	err = Connector.SetupJoinTable(&models.User{}, "Meals", &models.UserMeal{})
+	if err != nil {
+		panic(err.Error())
+	}
+	err = Connector.AutoMigrate(
 		&models.User{},
 		&models.Meal{},
+		&models.UserMeal{},
 	)
-	log.Println("Tables migrated")
+	if err != nil {
+		panic(err.Error())
+	}
+	log.Println("Tables Migrated")
 }

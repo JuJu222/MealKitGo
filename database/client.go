@@ -18,7 +18,14 @@ func Connect(connectionString string) error {
 	return nil
 }
 
-func Migrate(table *models.Person) {
-	Connector.AutoMigrate(&table)
-	log.Println("Table migrated")
+func Migrate() {
+	Connector.DropTable(
+		&models.User{},
+		&models.Meal{},
+	)
+	Connector.AutoMigrate(
+		&models.User{},
+		&models.Meal{},
+	)
+	log.Println("Tables migrated")
 }

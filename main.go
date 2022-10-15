@@ -7,7 +7,6 @@ import (
 	"log"
 	"main/controllers"
 	"main/database"
-	"main/models"
 	"net/http"
 	"os"
 )
@@ -48,5 +47,5 @@ func initDB() {
 	if err != nil {
 		panic(err.Error())
 	}
-	database.Migrate(&models.Person{})
+	database.Migrate()
 }

@@ -12,7 +12,7 @@ import (
 )
 
 func GetAllPerson(w http.ResponseWriter, r *http.Request) {
-	var persons []models.Person
+	var persons []models.User
 	database.Connector.Find(&persons)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -23,7 +23,7 @@ func GetPersonByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	key := vars["id"]
 
-	var person models.Person
+	var person models.User
 	database.Connector.First(&person, key)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(person)
@@ -31,7 +31,7 @@ func GetPersonByID(w http.ResponseWriter, r *http.Request) {
 
 func CreatePerson(w http.ResponseWriter, r *http.Request) {
 	requestBody, _ := ioutil.ReadAll(r.Body)
-	var person models.Person
+	var person models.User
 	json.Unmarshal(requestBody, &person)
 
 	database.Connector.Create(person)
@@ -42,7 +42,7 @@ func CreatePerson(w http.ResponseWriter, r *http.Request) {
 
 func UpdatePersonByID(w http.ResponseWriter, r *http.Request) {
 	requestBody, _ := ioutil.ReadAll(r.Body)
-	var person models.Person
+	var person models.User
 	json.Unmarshal(requestBody, &person)
 	database.Connector.Save(&person)
 
@@ -55,7 +55,7 @@ func DeletPersonByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	key := vars["id"]
 
-	var person models.Person
+	var person models.User
 	id, _ := strconv.ParseInt(key, 10, 64)
 	database.Connector.Where("id = ?", id).Delete(&person)
 	w.WriteHeader(http.StatusNoContent)

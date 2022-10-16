@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type UserMeal struct {
+type MealCategory struct {
 	UserID    int `gorm:"primaryKey"`
 	MealID    int `gorm:"primaryKey"`
 	CreatedAt time.Time

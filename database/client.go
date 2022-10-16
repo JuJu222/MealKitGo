@@ -23,19 +23,25 @@ func Migrate() {
 	err := Connector.Migrator().DropTable(
 		&models.User{},
 		&models.Meal{},
-		&models.UserMeal{},
+		&models.Category{},
+		&models.MealCategory{},
+		&models.Order{},
+		&models.OrderDetail{},
 	)
 	if err != nil {
 		panic(err.Error())
 	}
-	err = Connector.SetupJoinTable(&models.User{}, "Meals", &models.UserMeal{})
+	//err = Connector.SetupJoinTable(&models.User{}, "Meals", &models.UserMeal{})
 	if err != nil {
 		panic(err.Error())
 	}
 	err = Connector.AutoMigrate(
 		&models.User{},
 		&models.Meal{},
-		&models.UserMeal{},
+		&models.Category{},
+		&models.MealCategory{},
+		&models.Order{},
+		&models.OrderDetail{},
 	)
 	if err != nil {
 		panic(err.Error())

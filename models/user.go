@@ -6,5 +6,5 @@ type User struct {
 	LastName  string `json:"last_name"`
 	Email     string
 	Password  string
-	Meals     []Meal `gorm:"many2many:user_meals;"`
+	//Meals     []Meal `gorm:"many2many:user_meals;"`
 }

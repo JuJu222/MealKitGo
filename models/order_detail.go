@@ -1,7 +1,13 @@
 package models
 
+import "time"
+
 type OrderDetail struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Price string `json:"price"`
+	ID        int
+	MealID    int
+	OrderID   int
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	Meal      Meal  `gorm:"foreignKey:MealID"`
+	Order     Order `gorm:"foreignKey:OrderID"`
 }

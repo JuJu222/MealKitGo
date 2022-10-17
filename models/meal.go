@@ -1,7 +1,9 @@
 package models
 
 type Meal struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Price string `json:"price"`
+	ID          int
+	Name        string `gorm:"size:255"`
+	Description string
+	Price       int64
+	Steps       []Step
 }

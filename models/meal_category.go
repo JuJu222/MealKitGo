@@ -3,8 +3,11 @@ package models
 import "time"
 
 type MealCategory struct {
-	MealID     int `gorm:"primaryKey"`
-	CategoryID int `gorm:"primaryKey"`
+	ID         int
+	MealID     int
+	CategoryID int
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+	Meal       Meal     `gorm:"foreignKey:MealID"`
+	Category   Category `gorm:"foreignKey:CategoryID"`
 }

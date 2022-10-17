@@ -1,11 +1,13 @@
 package models
 
 type User struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Email     string
-	Password  string
+	ID        int
+	FirstName string `gorm:"size:255"`
+	LastName  string `gorm:"size:255"`
+	Email     string `gorm:"size:255"`
+	Password  string `gorm:"size:255"`
+	Phone     string `gorm:"size:255"`
+	City      string `gorm:"size:255"`
+	Address   string `gorm:"size:255"`
 	Orders    []Order
-	//Meals     []Meal `gorm:"many2many:user_meals;"`
 }

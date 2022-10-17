@@ -1,6 +1,7 @@
 package models
 
-type Category struct {
+type Ingredient struct {
 	ID   int
 	Name string `gorm:"size:255"`
+	Unit string
 }

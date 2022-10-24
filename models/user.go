@@ -2,8 +2,7 @@ package models
 
 type User struct {
 	ID             int
-	FirstName      string `gorm:"size:255"`
-	LastName       string `gorm:"size:255"`
+	FullName       string `gorm:"size:255"`
 	Email          string `gorm:"size:255"`
 	Password       string `gorm:"size:255"`
 	Phone          string `gorm:"size:255"`

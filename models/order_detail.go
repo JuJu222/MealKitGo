@@ -6,6 +6,7 @@ type OrderDetail struct {
 	ID        int
 	MealID    int
 	OrderID   int
+	Quantity  int
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Meal      Meal  `gorm:"foreignKey:MealID"`
